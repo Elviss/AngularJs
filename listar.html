@@ -1,7 +1,9 @@
 <h2>Listagem de pessoas</h2>
 
 <ul>
-    <li data-ng-repeat="pessoa in pessoas">{{pessoa.nome}}, {{pessoa.cidade}}</li>
+    <li data-ng-repeat="pessoa in pessoas">
+        <a href="#/pessoa/{{$index}}">{{pessoa.nome}}, {{pessoa.cidade}}</a> <button name="remover" data-ng-click="remover($index)">Remover</button>
+    </li>
 </ul>
 
 <a href="/#/pessoa/adicionar">Adicionar nova pessoa</a>

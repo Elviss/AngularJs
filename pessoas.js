@@ -15,6 +15,11 @@ angular
                 controller: 'CtrlAdicionar'
             })
 
+            .when('/pessoa/:index', {
+                templateUrl: 'editar.html',
+                controller: 'CtrlEditar'
+            })
+
 
 
     })
@@ -28,6 +33,10 @@ angular
             {'nome': 'Cleber', 'cidade': 'Barueri'}
         ];
 
+        $scope.remover = function(index) {
+            $scope.pessoas.splice(index, 1);
+        }
+
     }])
 
     .controller('CtrlAdicionar', ['$scope', function($scope){
@@ -38,4 +47,8 @@ angular
             $scope.pessoa = "";
             $scope.result = "Registro adicionado com sucesso!";
         }
+    }])
+
+    .controller('CtrlEditar', ['$scope', '$routeParams', function($scope, $routeParams){
+        $scope.pessoa = $scope.pessoas[$routeParams.index];
     }]);
