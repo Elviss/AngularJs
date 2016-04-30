@@ -1,0 +1,18 @@
+<div data-ng-init="load()">
+    <h3>Listagem</h3>
+
+    <table class="table">
+        <thead>
+            <th>Id</th>
+            <th>Pessoa</th>
+            <th>Email</th>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="registro in registros">
+                <td>{{registro.id}}</td>
+                <td>{{registro.nome}}</td>
+                <td>{{registro.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
