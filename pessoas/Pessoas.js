@@ -9,6 +9,9 @@ pessoas
                 .when('/', {
                     templateUrl: 'pessoas/templates/index.html'
                 })
+                .when('/novo/', {
+                    templateUrl: 'pessoas/templates/novo.html'
+                })
         }
     ]
 );
