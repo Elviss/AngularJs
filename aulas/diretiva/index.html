@@ -11,8 +11,8 @@
 
     <div data-ng-controller="CtrlApp">
 
-        <button data-son-click="executa()">Click</button>
-
+        <!--<button data-son-click="executa()">Click</button>-->
+        <son-clic click="executa()">Click</son-clic>
     </div>
 
     <script>
@@ -24,6 +24,21 @@
                         link: function(scope, element, attrs) {
                             element.bind('click', function(){
                                 scope.$eval(attrs.sonClick);
+                            })
+                        }
+                    };
+
+                })
+                .directive('sonClic', function(){
+
+                    return {
+                        restrict: 'E',
+                        replace: true,
+                        transclude: true,
+                        template: '<button ng-transclude></button>',
+                        link: function(scope, element, attrs) {
+                            element.bind('click', function(){
+                                scope.$eval(attrs.click);
                             })
                         }
                     };
