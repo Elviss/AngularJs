@@ -1,7 +1,7 @@
 pessoas
     .controller('PessoasCtrl',
-        ['$scope', 'PessoasSrv', '$location',
-            function($scope, PessoasSrv, $location) {
+        ['$scope', 'PessoasSrv', '$location', '$routeParams',
+            function($scope, PessoasSrv, $location, $routeParams) {
 
                 $scope.load = function() {
                     $scope.registros = PessoasSrv.query();
@@ -9,6 +9,10 @@ pessoas
 
                 $scope.clear = function() {
                     $scope.item = "";
+                };
+
+                $scope.get = function() {
+                    $scope.item = PessoasSrv.get({id : $routeParams.id});
                 };
 
                 $scope.add = function(item) {
@@ -22,8 +26,39 @@ pessoas
                             alert("Ocorreu um erro: "+data.message[0]);
                         }
                     );
-                    $scope.item = item;
                 };
+
+                $scope.editar = function(item) {
+                    var param = $jQuery.param(JSON.parse(angular.toJson(item)));
+
+                    $scope.result = PessoasSrv.update(
+                        {id: $routeParams.id},
+                        param,
+                        function(data, status, headers, config) {
+                            $location.path('/');
+                        },
+                        function(data, status, headers, config) {
+                            alert("Ocorreu um erro: "+data.message[0]);
+                        }
+                    );
+                };
+
+                $scope.delete = function(id) {
+                    if(confirm('Deseja realmente excluir essa pessoa?')) {
+                        PessoasSrv.remove(
+                            {id: id},
+                            {},
+                            function(data, status, headers, config) {
+                                $scope.load();
+                            },
+                            function(data, status, headers, config) {
+                                alert("Ocorreu um erro: "+data.message[0]);
+                            }
+                        )
+                    } else {
+                        $scope.load();
+                    }
+                }
 
             }
         ]

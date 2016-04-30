@@ -12,6 +12,9 @@ pessoas
                 .when('/novo/', {
                     templateUrl: 'pessoas/templates/novo.html'
                 })
+                .when('/editar/:id', {
+                    templateUrl: 'pessoas/templates/editar.html'
+                })
         }
     ]
 );
